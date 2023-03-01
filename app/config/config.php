@@ -10,6 +10,6 @@ define('DB_NAME','kmvc');
 //app root
 define('APPROOT', dirname(dirname(__FILE__)));
 //URL Root
-define('URLROOT', 'http://mvc.test');
+define('URLROOT', 'http://php-notes.test');
 //Site name
-define('SITENAME', 'krepiMVC');
+define('SITENAME', 'NOTES');
