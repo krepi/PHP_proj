@@ -13,3 +13,6 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://php-notes.test');
 //Site name
 define('SITENAME', 'NOTES');
+
+//App version 
+define('VERSION', '1.0.0');

@@ -11,6 +11,7 @@ class Pages extends Controller
 
         $data = [
             'title' => 'Notes ',
+            'description'=> 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy'
 
         ];
 
@@ -21,7 +22,8 @@ class Pages extends Controller
     public function about()
     {
         $data = [
-            'title' => 'About Us'
+            'title' => 'About Us',
+            'description'=> 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy'
         ];
         $this->view('pages/about', $data);
     }
