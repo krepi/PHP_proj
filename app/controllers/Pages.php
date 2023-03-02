@@ -10,7 +10,7 @@ class Pages extends Controller
     {
 
         $data = [
-            'title' => 'Welcome',
+            'title' => 'Notes ',
 
         ];
 
