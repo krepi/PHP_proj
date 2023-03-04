@@ -33,7 +33,7 @@ class Users extends Controller
                 $data['email_err'] = 'Please enter email';
             } else {
                 //check email
-                if($this->userModel->findUserByEmail($data['email'])){
+                if ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = 'Email is already taken';
                 }
             }
@@ -62,20 +62,18 @@ class Users extends Controller
             // Make sure errors are empty
             if (empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
                 //validated
-               
+
                 //hash password
-                $data['password'] = password_hash( $data['password'] , PASSWORD_DEFAULT);
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 //Register User
-                
-                if($this->userModel->register($data)){
+
+                if ($this->userModel->register($data)) {
                     //redirect
                     redirect('/users/login');
-
                 } else {
                     die('somethin were wrong');
                 }
-
             } else {
                 $this->view('users/register', $data);
             }
@@ -110,9 +108,9 @@ class Users extends Controller
             // Init data
             $data = [
                 'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),              
+                'password' => trim($_POST['password']),
                 'email_err' => '',
-                'password_err' => '',               
+                'password_err' => '',
             ];
 
             //Validate email
@@ -127,7 +125,7 @@ class Users extends Controller
             }
 
             // Make sure errors are empty
-            if (empty($data['email_err'])  && empty($data['password_err']) ) {
+            if (empty($data['email_err'])  && empty($data['password_err'])) {
                 //validated
                 die('success');
             } else {
