@@ -6,17 +6,12 @@
     Written by <?= $data['user']->name; ?> on <?= $data['post']->created_at; ?>
 </div>
 <p><?= $data['post']->body; ?></p>
-<?php if($data['post']->user_id == $_SESSION['user_id']) : ?>
-<hr>
-<a href="<?= URLROOT;?>/posts/edit/<?= $data['post']->id  ;?>" class="btn btn-dark">Edit</a>
+<?php if ($data['post']->user_id == $_SESSION['user_id']) : ?>
+    <hr>
+    <a href="<?= URLROOT; ?>/posts/edit/<?= $data['post']->id; ?>" class="btn btn-dark">Edit</a>
 
-<form class="float-end" action="<?= URLROOT;?>/posts/delete/<?= $data['post']->id  ;?>" method = "post">
-
-<input type="submit" value="Delete" class="btn btn-danger">
-</form>
-
+    <form class="float-end" action="<?= URLROOT; ?>/posts/delete/<?= $data['post']->id; ?>" method="post">
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
 <?php endif; ?>
-
-
-
 <?php require APPROOT . '/views/inc/footer.php'; ?>
