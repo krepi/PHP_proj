@@ -12,6 +12,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URLROOT ?>/pages/about">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URLROOT ?>/pages/recipes">About</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

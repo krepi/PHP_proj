@@ -31,4 +31,13 @@ class Pages extends Controller
         ];
         $this->view('pages/about', $data);
     }
+
+    public function recipes()
+    {
+        $data =[
+          'title' => 'Recipes',
+          'description' => "here we will display recipes"
+        ];
+        $this->view('pages/recipes', $data);
+    }
 }
