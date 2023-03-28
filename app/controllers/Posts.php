@@ -16,6 +16,7 @@ class Posts extends Controller
 
     public function index()
     {
+        // todo decide about calling that method
         //Get posts
         $posts = $this->postModel->getPosts();
 
