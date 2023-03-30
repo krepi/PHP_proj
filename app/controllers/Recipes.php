@@ -8,7 +8,19 @@ class Recipes extends Controller
             redirect('users/login');
         }
 
-        $this->postModel = $this->model('Recipe');
+        $this->recipeModel = $this->model('Recipe');
         $this->userModel = $this->model('User');
+    }
+    public function index()
+    {
+        // todo decide about calling that method
+        //Get posts
+        $recipes = $this->recipeModel->getRecipes();
+
+
+        $data = [
+            'recipes' => $recipes
+        ];
+        $this->view('recipes/index', $data);
     }
 }
