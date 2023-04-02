@@ -10,16 +10,18 @@ class Recipes extends Controller
 
         $this->recipeModel = $this->model('Recipe');
         $this->userModel = $this->model('User');
+
     }
     public function index()
     {
         // todo decide about calling that method
-        //Get posts
-        $recipes = $this->recipeModel->getRecipes();
+        //Get recipes Ids from DB
+        $recipes = $this->recipeModel->getRecipes();    
+//        $recipes = $this->recipeApi->getRecipes();
 
 
         $data = [
-            'recipes' => $recipes
+            'recipes' => $recipes->title
         ];
         $this->view('recipes/index', $data);
     }

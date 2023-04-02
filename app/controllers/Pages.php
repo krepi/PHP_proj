@@ -2,9 +2,16 @@
 
 class Pages extends Controller
 {
+    public RecipeApi $recipeApi;
+
+    /**
+     * @param RecipeApi $recipeApi
+     */
     public function __construct()
     {
+
     }
+
 
     public function index()
     {
@@ -12,11 +19,13 @@ class Pages extends Controller
             redirect('posts');
         }
 
+        $recipeApi = new RecipeApi('breakfast&includeIngredients=eggs',3);
+         $recipes = $recipeApi->getData();
 
         $data = [
             'title' => 'Notes ',
-            'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy'
-
+            'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
+            'recipes' => $recipes
         ];
 
 
