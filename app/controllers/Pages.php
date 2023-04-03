@@ -16,7 +16,8 @@ class Pages extends Controller
     public function index()
     {
         if (isLoggedIn()) {
-            redirect('posts');
+//            redirect('recipes');
+            echo "welcome to pyry";
         }
 
         $recipeApi = new RecipeApi('breakfast&includeIngredients=eggs',3);

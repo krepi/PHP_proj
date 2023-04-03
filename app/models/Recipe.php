@@ -11,14 +11,14 @@ class Recipe
     public function getRecipes()
     {
         $this->db->query('SELECT *, 
-        recipe.id as recipeId,
+        recipes.id as recipeId,
         users.id as userId,
         recipe.created_at as recipeCreated,
         users.created_at as userCreated
          FROM posts
          INNER JOIN users
-         ON posts.user_id = users.id
-         ORDER BY posts.created_at DESC
+         ON recipes.user_id = users.id
+         ORDER BY recipes.created_at DESC
          ');
 
         $results = $this->db->resultSet();

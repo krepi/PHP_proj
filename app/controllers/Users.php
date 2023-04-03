@@ -9,7 +9,7 @@ class Users extends Controller
     //---------------------------------------REGISTER-------------------------------
     public function register()
     {
-        //Check for POST  
+        //Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Process form
 
@@ -98,7 +98,7 @@ class Users extends Controller
     //--------------------------------------------LOGIN____________________________________
     public function login()
     {
-        //Check for POST  
+        //Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Process form
 
@@ -171,7 +171,8 @@ class Users extends Controller
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
-        redirect('posts');
+        // page displayed after logged in (was posts)
+        redirect('/');
     }
     //  --------------------------logout----------------------------------
     public function logout()
@@ -183,5 +184,5 @@ class Users extends Controller
         redirect('users/login');
     }
     //------------------------------------------------------
-   
+
 }
