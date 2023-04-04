@@ -26,4 +26,31 @@ class Set
 
         return $results;
     }
+    public function addSet($data)
+    {
+        $this->db->query('INSERT INTO sets (set_name, user_id, body) VALUES ( :set_name,:user_id, :body)');
+        //bind values
+        $this->db->bind(':set_name', $data['set_name']);
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':body', $data['body']);
+
+        //execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getSetById($id)
+    {
+        $this->db->query('SELECT * FROM sets WHERE id = :id');
+        //bind value
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
+
+    }
 }
