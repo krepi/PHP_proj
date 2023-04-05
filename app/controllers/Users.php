@@ -166,6 +166,17 @@ class Users extends Controller
     }
     // ___________________________________________________________________________________________
 
+    //  --------------------------logout----------------------------------
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
+        session_destroy();
+//        redirect('users/login');
+        redirect('/');
+    }
+    //------------------------------------------------------
     public function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->id;
@@ -174,15 +185,6 @@ class Users extends Controller
         // page displayed after logged in (was posts)
         redirect('/');
     }
-    //  --------------------------logout----------------------------------
-    public function logout()
-    {
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_email']);
-        unset($_SESSION['user_name']);
-        session_destroy();
-        redirect('users/login');
-    }
-    //------------------------------------------------------
+
 
 }

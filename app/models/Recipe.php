@@ -27,11 +27,11 @@ class Recipe
     }
     public function addRecipe($data)
     {
-        $this->db->query('INSERT INTO recipes (title, user_id, body) VALUES (:title, :user_id, :body)');
+        $this->db->query('INSERT INTO recipes_fav (user_id,recipe_id) VALUES (:user_id, :recipe_id)');
         //bind values
-        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':recipe_id', $data['recipe_id']);
         $this->db->bind(':user_id', $data['user_id']);
-        $this->db->bind(':body', $data['body']);
+//        $this->db->bind(':body', $data['body']);
 
         //execute
         if ($this->db->execute()) {
@@ -40,4 +40,45 @@ class Recipe
             return false;
         }
     }
+
+    public function findRecipeById($recipe_id, $user_id)
+    {
+        $this->db->query('SELECT * FROM recipes_fav WHERE recipe_id = :recipe_id AND user_id = :user_id');
+        //bind value
+        $this->db->bind(':recipe_id', $recipe_id);
+        $this->db->bind(':user_id', $user_id);
+
+        $row = $this->db->single();
+
+        // check row
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function getRecipeById($recipe_id)
+    {
+        $this->db->query('SELECT * FROM recipes_fav WHERE recipe_id = :recipe_id');
+        //bind value
+        $this->db->bind(':recipe_id', $recipe_id);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    public function deleteRecipeByID($recipe_id)
+    {
+        $this->db->query('DELETE  FROM recipes_fav WHERE recipe_id = :recipe_id');
+        //bind value
+        $this->db->bind(':recipe_id', $recipe_id);
+        //execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

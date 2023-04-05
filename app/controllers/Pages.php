@@ -4,11 +4,15 @@ class Pages extends Controller
 {
     public RecipeApi $recipeApi;
 
-    /**
-     * @param RecipeApi $recipeApi
-     */
     public function __construct()
     {
+        if (isLoggedIn()) {
+//            redirect('/');
+
+
+        $this->recipeModel = $this->model('Recipe');
+        $this->userModel = $this->model('User');
+        }
 
     }
 
@@ -17,17 +21,37 @@ class Pages extends Controller
     {
         if (isLoggedIn()) {
 //            redirect('recipes');
-            echo "welcome to pyry";
-        }
 
-        $recipeApi = new RecipeApi('breakfast&includeIngredients=eggs',3);
+
+
+        $recipeApi = new RecipeApi('',3);
          $recipes = $recipeApi->getData();
 
-        $data = [
-            'title' => 'Notes ',
-            'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
-            'recipes' => $recipes
-        ];
+         $user= $_SESSION['user_id'];
+            $id = '133432';
+
+        if($this->recipeModel->findRecipeById($id, $user)){
+            $btn_class = 'btn-warning';
+        } else {
+            $btn_class = 'btn-light';
+        }
+            $data = [
+                'title' => 'Notes ',
+                'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
+                'recipes' => $recipes,
+                'btn_class'=> $btn_class
+            ];
+            $this->view('pages/index', $data);
+
+        } else {
+            $data = [
+                'title' => 'Notes ',
+                'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
+                'recipes' =>[],
+                'btn_class'=> 'btn-light'
+            ];
+        }
+
 
 
         $this->view('pages/index', $data);

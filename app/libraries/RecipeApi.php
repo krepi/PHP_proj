@@ -1,6 +1,6 @@
 <?php
 
-class RecipeApi extends Controller
+class RecipeApi
 {
     private $url = 'https://api.spoonacular.com/recipes/complexSearch';
     private $apiKey = API_KEY;
