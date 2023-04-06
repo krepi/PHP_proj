@@ -183,7 +183,7 @@ class Users extends Controller
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
         // page displayed after logged in (was posts)
-        redirect('/');
+        redirect('recipes/index');
     }
 
 

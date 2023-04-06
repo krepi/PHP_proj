@@ -2,26 +2,31 @@
 <?php flash('post_message' ); ?>
 <div class="row mb-3">
     <div class="col-md-6">
-        <h1>RECPS</h1>
+        <h1 class="display-3"><?= $data['title']; ?></h1>
+        <p class="lead"><?= $data['description']; ?></p>
     </div>
-    <div class="col-md-6">
-        <a href="<?= URLROOT; ?>/posts/add" class="btn btn-primary float-end">
-        <i class="fa fa-pencil"></i> Add post
 
-        </a>
-    </div>
 </div>
-<?php foreach($data['posts'] as $post) :?>
-   <div class="card card-body mb-3">
-    <h4 class="card-title"><?= $post->title;?>  </h4>
-    <div class="bg-light p2 mb-3">
-    Written by <?= $post->name; ?> on  <?= $post->postCreated; ?>
-    </div>
-    <p class="card-text"><?= $post->body;?></p>
-    <a href="<?= URLROOT;?>/posts/show/<?= $post->postId;?>" class="btn btn-dark">More</a>
+<?php if (!empty($data['recipes']) ): ?>
+    <?php foreach ($data['recipes']['results'] as $recipe): ?>
+        <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
+            <button name="recipe_id" class="btn btn-light" data-toggle="tooltip" data-placement="top"
+                    value="<?= $recipe['id']; ?>" title="Like"><i class="fas fa-star"></i></button>
+        </form>
 
-   </div>
+        <p class="lead"><?= $recipe['title']; ?></p>
+        <img src="<?= $recipe['image']; ?>" alt="">
+        <div class="mb-5"></div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <h2>Prawdopodbnie limit zapytań do API  sie wyczerpał</h2>
+    <p>Wiec pracuje na dummy danych</p>
+    <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
+        <button name="recipe_id" class="btn <?= $data['btn_class']; ?>" data-toggle="tooltip" data-placement="top"
+                value="133432" title="Like"><i class="fas fa-star"></i></button>
+    </form>
+<?php endif; ?>
 
 
-<?php endforeach ; ?>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
