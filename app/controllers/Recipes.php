@@ -13,51 +13,61 @@ class Recipes extends Controller
         $this->apiModel = $this->model('RecipeApi');
 
     }
+
     public function index()
     {
         // todo decide about calling that method
         if (isLoggedIn()) {
 //            redirect('recipes');
 
-            $recipes = $this->apiModel->getData();
-print_r($recipes);
-            $user= $_SESSION['user_id'];
-            $recipe = $recipes['results'][0];
-            $id = $recipe['id'];
+            $dataApi = $this->apiModel->getData();
 
-            if($this->recipeModel->findRecipeById($id, $user)){
-                $btn_class = 'btn-warning';
-            } else {
-                $btn_class = 'btn-light';
+            // exteract recipes from   Api datas
+            $recipesApi = $dataApi['results'];
+            $newRecipes=[];
+            // check is  recipe in DB as favorite  and add proper class for button
+            foreach ($recipesApi as $recipe) {
+
+                $user = $_SESSION['user_id'];
+
+                $id = $recipe['id'];
+
+                if ($this->recipeModel->findRecipeById($id, $user)) {
+                    $btn_class = 'btn-warning';
+                } else {
+                    $btn_class = 'btn-light';
+                }
+                // add btn class for recipe
+                $recipe ['btn_class'] = $btn_class;
+                $newRecipes[$recipe['id']] = $recipe;
             }
+
             $data = [
                 'title' => 'Notes z recipe ',
                 'description' => 'Tutaj znajdziesz swoje ulubione przepisy i zestawy',
-                'recipes' => $recipes,
-                'btn_class'=> $btn_class
+                'recipes' => $newRecipes
+
             ];
+            print_r($data);
             $this->view('recipes/index', $data);
 
         } else {
             $data = [
                 'title' => 'Notes ',
                 'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
-                'recipes' =>[],
-                'btn_class'=> 'btn-light'
+                'recipes' => [],
+                'btn_class' => 'btn-light'
             ];
         }
 
-//        $data = [
-//            'recipes' => $recipes->title
-//        ];
-//        $this->view('recipes/index', $data);
+
     }
 
 
-
-    public function add(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-print_r($_POST);
+    public function add()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            print_r($_POST);
             $data = [
                 'recipe_id' => trim($_POST['recipe_id']),
                 'user_id' => $_SESSION['user_id'],
@@ -67,7 +77,7 @@ print_r($_POST);
             $user = $_SESSION['user_id'];
 
             //check if recipe_id is already liked in database
-            if($this->recipeModel->findRecipeById($id, $user)){
+            if ($this->recipeModel->findRecipeById($id, $user)) {
                 echo "recipe $id is already added by user $user  ";
             } else {
                 // adding to database  if not
@@ -79,9 +89,6 @@ print_r($_POST);
                     echo " cos poszło nie tak";
                 }
             }
-
-
-
 
 
         }

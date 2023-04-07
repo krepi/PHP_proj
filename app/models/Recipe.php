@@ -27,7 +27,7 @@ class Recipe
     }
     public function addRecipe($data)
     {
-        $this->db->query('INSERT INTO recipes_fav (user_id,recipe_id) VALUES (:user_id, :recipe_id)');
+        $this->db->query('INSERT INTO recipes_fav (user_id,recipe_id, title) VALUES (:user_id, :recipe_id)');
         //bind values
         $this->db->bind(':recipe_id', $data['recipe_id']);
         $this->db->bind(':user_id', $data['user_id']);
