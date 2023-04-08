@@ -12,11 +12,13 @@
         <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
             <button name="recipe_id" class="btn <?= $recipe['btn_class']; ?>" data-toggle="tooltip" data-placement="top"
                     value="<?= $recipe['id']; ?>" title="Like"><i class="fas fa-star"></i></button>
+            <input type="hidden" name="recipe_title" value="<?= $recipe['title']; ?>">
+            <input type="hidden" name="recipe_img" value="<?= $recipe['image']; ?>">
         </form>
-
         <p  class="lead"><?= $recipe['title']; ?></p>
         <img  src="<?= $recipe['image']; ?>" alt="">
         <div class="mb-5"></div>
+
 
     <?php endforeach; ?>
 <?php else: ?>

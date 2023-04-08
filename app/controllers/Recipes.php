@@ -18,10 +18,7 @@ class Recipes extends Controller
     {
         // todo decide about calling that method
         if (isLoggedIn()) {
-//            redirect('recipes');
-
             $dataApi = $this->apiModel->getData();
-
             // exteract recipes from   Api datas
             $recipesApi = $dataApi['results'];
             $newRecipes=[];
@@ -39,6 +36,7 @@ class Recipes extends Controller
                 }
                 // add btn class for recipe
                 $recipe ['btn_class'] = $btn_class;
+                //add recipe to recipes
                 $newRecipes[$recipe['id']] = $recipe;
             }
 
@@ -48,7 +46,6 @@ class Recipes extends Controller
                 'recipes' => $newRecipes
 
             ];
-            print_r($data);
             $this->view('recipes/index', $data);
 
         } else {
@@ -56,7 +53,7 @@ class Recipes extends Controller
                 'title' => 'Notes ',
                 'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
                 'recipes' => [],
-                'btn_class' => 'btn-light'
+
             ];
         }
 
@@ -67,9 +64,11 @@ class Recipes extends Controller
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            print_r($_POST);
+
             $data = [
                 'recipe_id' => trim($_POST['recipe_id']),
+                'recipe_title' => trim($_POST['recipe_title']),
+                'recipe_img' => trim($_POST['recipe_img']),
                 'user_id' => $_SESSION['user_id'],
 
             ];
@@ -78,13 +77,15 @@ class Recipes extends Controller
 
             //check if recipe_id is already liked in database
             if ($this->recipeModel->findRecipeById($id, $user)) {
-                echo "recipe $id is already added by user $user  ";
+                flash('post_message', 'recipe is already added ');
+               // here delete method
             } else {
                 // adding to database  if not
                 if ($this->recipeModel->addRecipe($data)) {
                     flash('post_message', 'recipe added to favorites');
                     redirect('recipes/index');
                     echo "dodane przez controller z if . $id . user . $user";
+
                 } else {
                     echo " cos poszło nie tak";
                 }
