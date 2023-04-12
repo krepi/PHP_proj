@@ -21,6 +21,7 @@ class Recipes extends Controller
             $dataApi = $this->apiModel->getData();
             // exteract recipes from   Api datas
             $recipesApi = $dataApi['results'];
+
             $newRecipes=[];
             // check is  recipe in DB as favorite  and add proper class for button
             foreach ($recipesApi as $recipe) {
