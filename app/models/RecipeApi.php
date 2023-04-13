@@ -1,13 +1,13 @@
 <?php
 
-class RecipeApi
+class RecipeApi extends Api
 {
-    private $url = 'https://api.spoonacular.com/recipes/complexSearch';
-    private $apiKey = API_KEY;
-    private $query ;
-    private $number = 3 ;
-    private $responce;
-    private array $data;
+//    private $url = 'https://api.spoonacular.com/recipes/complexSearch';
+//    private $apiKey = API_KEY;
+//    private $query ;
+//    private $number = 3 ;
+//    private $responce;
+//    private array $data;
 
 
 
@@ -18,11 +18,7 @@ class RecipeApi
     }
 
 
-    public function url(){
-        $url = $this->url . '?apiKey=' . $this->apiKey . '&query=' . $this->query . '&number=' . $this->number;
-        var_dump($url);
-        return $url;
-    }
+
 
 
     /**

@@ -8,6 +8,7 @@ define('DB_NAME', 'kmvc');
 
 //Api
 define('API_KEY','822eeba2ab9b4315b3009deebe565d22');
+define('API_URL', 'https://api.spoonacular.com/recipes/');
 
 
 //app root
