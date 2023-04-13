@@ -18,6 +18,9 @@ class Recipes extends Controller
     {
         // todo decide about calling that method
         if (isLoggedIn()) {
+            // setting Api search function
+            $this->apiModel->complexSearch();
+            //fetching datas from  Api
             $dataApi = $this->apiModel->getData();
             // exteract recipes from   Api datas
             $recipesApi = $dataApi['results'];
@@ -61,7 +64,7 @@ class Recipes extends Controller
 
     }
 
-
+// adding recipe to favourites Database table
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -4,7 +4,7 @@ class Api
 {
     private $url = API_URL;
 
-    private $funct = 'complexSearch';
+    private $funct ;
     private $apiKey = API_KEY;
     private $query = 'pasta' ;
     private $number= 3 ;
@@ -16,6 +16,10 @@ class Api
         $url = $this->url. $this->funct . '?apiKey=' . $this->apiKey . '&query=' . $this->query . '&number=' . $this->number;
         var_dump($url);
         return $url;
+    }
+
+    public function complexSearch(){
+        $this->funct = 'complexSearch';
     }
 
 }
