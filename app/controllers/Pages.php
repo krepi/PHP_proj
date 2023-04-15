@@ -12,7 +12,9 @@ class Pages extends Controller
 
     public function index()
     {
-
+        if(isLoggedIn()){
+            redirect('recipes/index');
+        }
         $data = [
             'title' => 'Welcome',
             'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy'
@@ -34,11 +36,11 @@ class Pages extends Controller
     public function recipes()
     {
         if(isLoggedIn()){
-            redirect('recipes/index');
+            redirect('recipes/your_recipes');
         }
         $data =[
           'title' => 'Recipes',
-          'description' => "here we will display recipes"
+          'description' => "Here we will display your recipes if You log in. "
         ];
         $this->view('pages/recipes', $data);
     }

@@ -19,9 +19,9 @@ class Recipes extends Controller
         // todo decide about calling that method
         if (isLoggedIn()) {
             // setting Api search function
-            $this->apiModel->complexSearch();
+//            $this->apiModel->complexSearch();
             //fetching datas from  Api
-            $dataApi = $this->apiModel->getData();
+            $dataApi = $this->apiModel->getComplexData();
             // exteract recipes from   Api datas
             $recipesApi = $dataApi['results'];
 
@@ -99,4 +99,20 @@ class Recipes extends Controller
         }
 
     }
+
+        public function your_recipes()
+    {
+        if (isLoggedIn()) {
+            $user_id = $_SESSION['user_id'];
+            $recipes = $this->recipeModel->getUserRecipes($user_id);
+            $data = [
+                'title' => 'Twoje przepisy',
+                'description'=> 'tutaj sa twoje ulubione przepisy i zestawy',
+                'recipes' => $recipes
+                ];
+
+            $this->view('recipes/your_recipes',$data);
+        }
+    }
+
 }

@@ -9,6 +9,7 @@
 </div>
 <?php if (!empty($data['recipes']) ): ?>
     <?php foreach ($data['recipes'] as $recipe): ?>
+        <a href="">
         <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
             <button name="recipe_id" class="btn <?= $recipe['btn_class']; ?>" data-toggle="tooltip" data-placement="top"
                     value="<?= $recipe['id']; ?>" title="Like"><i class="fas fa-star"></i></button>
@@ -18,7 +19,7 @@
         <p  class="lead"><?= $recipe['title']; ?></p>
         <img  src="<?= $recipe['image']; ?>" alt="">
         <div class="mb-5"></div>
-
+        </a>
 
     <?php endforeach; ?>
 <?php else: ?>

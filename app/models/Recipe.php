@@ -84,4 +84,17 @@ class Recipe
         }
     }
 
+    public function getUserRecipes($user_id)
+    {
+        $this->db->query('SELECT * FROM recipes_fav WHERE user_id = :user_id  
+         ORDER BY recipes_fav.created_at DESC
+         ');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        foreach ( $results as $result) {
+            $array[]= (array)$result;
+        }
+        return $array;
+    }
+
 }
