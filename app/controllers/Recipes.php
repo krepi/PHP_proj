@@ -4,9 +4,9 @@ class Recipes extends Controller
 {
     public function __construct()
     {
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
+//        if (!isLoggedIn()) {
+//            redirect('users/login');
+//        }
 
         $this->recipeModel = $this->model('Recipe');
         $this->userModel = $this->model('User');
@@ -47,18 +47,24 @@ class Recipes extends Controller
             $data = [
                 'title' => 'Notes z recipe ',
                 'description' => 'Tutaj znajdziesz swoje ulubione przepisy i zestawy',
-                'recipes' => $newRecipes
+                'recipes' => $newRecipes,
+                'fromApi'=> true
 
             ];
             $this->view('recipes/index', $data);
 
         } else {
+                // todo decide about calling that method here
+                //Get recipes
+                $recipes = $this->recipeModel->getRecipes();
             $data = [
-                'title' => 'Notes ',
-                'description' => 'Prosty projekt strony z postami z wykorzystaniem frameworka krepiMVC PHP z kursu Brada Traversy',
-                'recipes' => [],
+                'title' => 'Formulas',
+                'description' => 'Formulas chosen by our users, log in or sign up for more',
+                'recipes' => $recipes,
+                'fromApi'=> false
 
             ];
+            $this->view('recipes/index', $data);
         }
 
 
@@ -81,8 +87,12 @@ class Recipes extends Controller
 
             //check if recipe_id is already liked in database
             if ($this->recipeModel->findRecipeById($id, $user)) {
-                flash('post_message', 'recipe is already added ');
-               // here delete method
+               ;
+                if($this->recipeModel->deleteRecipe($id, $user));{
+                    flash('post_message', 'recipe deleted from favourites ');
+                    redirect('recipes/index');
+                }
+
             } else {
                 // adding to database  if not
                 if ($this->recipeModel->addRecipe($data)) {

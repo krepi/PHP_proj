@@ -11,17 +11,18 @@
     </div>
 
 </div>
-<?php //if (!empty($data['recipes']) ): ?>
     <?php foreach ($data['recipes'] as  $recipe): ?>
+        <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
+            <button name="recipe_id" class="btn btn-warning" data-toggle="tooltip" data-placement="top"
+                    value="<?= $recipe['recipe_id']; ?>" title="Like"><i class="fas fa-star"></i></button>
+            <input type="hidden" name="recipe_title" value="<?= $recipe['recipe_title']; ?>">
+            <input type="hidden" name="recipe_img" value="<?= $recipe['recipe_img']; ?>">
+        </form>
             <p  class="lead"><?= $recipe['recipe_title']; ?></p>
             <img  src="<?= $recipe['recipe_img']; ?>" alt="">
             <div class="mb-5"></div>
-
-
     <?php endforeach; ?>
-<?php //else: ?>
 
-<?php //endif; ?>
 
 
 

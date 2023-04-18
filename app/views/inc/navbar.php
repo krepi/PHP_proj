@@ -10,11 +10,12 @@
                     <a class="nav-link " aria-current="page" href="<?= URLROOT ?>">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= URLROOT ?>/pages/about">About</a>
+                    <a class="nav-link" href="<?= URLROOT ?>/pages/recipes">Your Recipes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= URLROOT ?>/pages/recipes">Recipes</a>
+                    <a class="nav-link" href="<?= URLROOT ?>/pages/about">About</a>
                 </li>
+
             </ul>
 
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

@@ -9,6 +9,11 @@ class RecipeApi extends Api
         $this->complexSearch();
         return $this->getData();
     }
+    public function getRandomData(): array
+    {
+        $this->randomSearch();
+        return $this->getData();
+    }
 
     public function getRecipeById($Id): array
     {

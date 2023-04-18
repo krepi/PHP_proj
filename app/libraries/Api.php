@@ -5,8 +5,8 @@ class Api
     private $url = API_URL;
     private $apiKey = API_KEY;
     private $funct;
-    private $query = 'chicken';
-    private $number = 3;
+    private $query  ;
+    private $number=9 ;
     private $responce;
     private array $data;
 
@@ -17,13 +17,18 @@ class Api
     {
         $this->funct = 'complexSearch';
     }
+    public function randomSearch()
+    {
+        $this->funct = 'random';
+    }
 //create url for Api request
     public function url()
     {
-        $url = $this->url . $this->funct . '?apiKey=' . $this->apiKey . '&query=' . $this->query . '&number=' . $this->number;
-//        var_dump($url);
+        $url = $this->url . $this->funct . '?apiKey=' . $this->apiKey  . '&number=' . $this->number;
+        var_dump($url);
         return $url;
     }
+//'&query=' . $this->query
     // fetching datas from Api
     public function getData(): array
     {

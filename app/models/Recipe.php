@@ -10,20 +10,20 @@ class Recipe
 
     public function getRecipes()
     {
-        $this->db->query('SELECT *, 
-        recipes.id as recipeId,
-        users.id as userId,
-        recipe.created_at as recipeCreated,
-        users.created_at as userCreated
-         FROM posts
-         INNER JOIN users
-         ON recipes.user_id = users.id
-         ORDER BY recipes.created_at DESC
+
+        $this->db->query('SELECT  DISTINCT 
+                                 recipe_id, 
+                                 recipe_title, 
+                                 recipe_img 
+                                FROM recipes_fav
          ');
 
         $results = $this->db->resultSet();
-
-        return $results;
+        //casting object to array
+        foreach ( $results as $result) {
+            $array[]= (array)$result;
+        }
+        return $array;
     }
     public function addRecipe($data)
     {
@@ -71,11 +71,12 @@ class Recipe
         return $row;
     }
 
-    public function deleteRecipeByID($recipe_id)
+    public function deleteRecipe($recipe_id, $user_id)
     {
-        $this->db->query('DELETE  FROM recipes_fav WHERE recipe_id = :recipe_id');
+        $this->db->query('DELETE  FROM recipes_fav WHERE recipe_id = :recipe_id AND user_id = :user_id');
         //bind value
         $this->db->bind(':recipe_id', $recipe_id);
+        $this->db->bind(':user_id', $user_id);
         //execute
         if ($this->db->execute()) {
             return true;
