@@ -6,7 +6,7 @@ class Api
     private $apiKey = API_KEY;
     private $funct;
     private $query  ;
-    private $number=9 ;
+    private $number=2 ;
     private $responce;
     private array $data;
 
@@ -15,7 +15,7 @@ class Api
 // set search function to complexSearch
     public function complexSearch()
     {
-        $this->funct = 'complexSearch';
+        $this->funct = 'random';
     }
     public function randomSearch()
     {

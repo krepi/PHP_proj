@@ -5,6 +5,8 @@ a{
 p{
     color:#333;
 }
+
+
 /*recipes cards */
 .db_recipe, .api_recipe  {
     min-height: 25rem;

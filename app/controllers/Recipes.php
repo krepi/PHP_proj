@@ -20,10 +20,25 @@ class Recipes extends Controller
         if (isLoggedIn()) {
             // setting Api search function
 //            $this->apiModel->complexSearch();
+
+            if(isset($_SESSION['randomRecipes'])){
+                $recipesApi= $_SESSION['randomRecipes'];
+            } else{
+
+
+
             //fetching datas from  Api
             $dataApi = $this->apiModel->getComplexData();
             // exteract recipes from   Api datas
-            $recipesApi = $dataApi['results'];
+//            $recipesApi = $dataApi['results'];
+//            print_r($dataApi);
+            $recipesApi = $dataApi['recipes'];
+            $_SESSION['randomRecipes'] = $recipesApi;
+            }
+
+
+
+
 
             $newRecipes=[];
             // check is  recipe in DB as favorite  and add proper class for button
