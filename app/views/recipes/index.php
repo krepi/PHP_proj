@@ -1,6 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php flash('post_message'); ?>
     <div class="row mb-3">
+        <form >
+            <div class =" search_form">
+            <input class="search_input" type="text">
+            </div>
+        </form>
         <div class="col-md-6">
             <h1 class="display-3"><?= $data['title']; ?></h1>
             <p class="lead"><?= $data['description']; ?></p>
