@@ -14,6 +14,41 @@ class Recipes extends Controller
 
     }
 
+
+    private function makeDataFromApi($recipesApi) :array{
+
+        $newRecipes=[];
+        // check is  recipe in DB as favorite  and add proper class for button
+        foreach ($recipesApi as $recipe) {
+
+            $user = $_SESSION['user_id'];
+
+            $id = $recipe['id'];
+
+            if ($this->recipeModel->findRecipeById($id, $user)) {
+                $btn_class = 'btn-warning';
+            } else {
+                $btn_class = 'btn-light';
+            }
+            // add btn class for recipe
+            $recipe ['btn_class'] = $btn_class;
+            //add recipe to recipes
+            $newRecipes[$recipe['id']] = $recipe;
+        }
+
+        $data = [
+            'title' => 'Notes z recipe ',
+            'description' => 'Tutaj znajdziesz swoje ulubione przepisy i zestawy',
+            'recipes' => $newRecipes,
+            'fromApi'=> true
+
+        ];
+        return $data;
+    }
+
+
+
+
     public function index()
     {
         // todo decide about calling that method
@@ -25,10 +60,8 @@ class Recipes extends Controller
                 $recipesApi= $_SESSION['randomRecipes'];
             } else{
 
-
-
             //fetching datas from  Api
-            $dataApi = $this->apiModel->getComplexData();
+            $dataApi = $this->apiModel->getRandomData();
             // exteract recipes from   Api datas
 //            $recipesApi = $dataApi['results'];
 //            print_r($dataApi);
@@ -38,34 +71,7 @@ class Recipes extends Controller
 
 
 
-
-
-            $newRecipes=[];
-            // check is  recipe in DB as favorite  and add proper class for button
-            foreach ($recipesApi as $recipe) {
-
-                $user = $_SESSION['user_id'];
-
-                $id = $recipe['id'];
-
-                if ($this->recipeModel->findRecipeById($id, $user)) {
-                    $btn_class = 'btn-warning';
-                } else {
-                    $btn_class = 'btn-light';
-                }
-                // add btn class for recipe
-                $recipe ['btn_class'] = $btn_class;
-                //add recipe to recipes
-                $newRecipes[$recipe['id']] = $recipe;
-            }
-
-            $data = [
-                'title' => 'Notes z recipe ',
-                'description' => 'Tutaj znajdziesz swoje ulubione przepisy i zestawy',
-                'recipes' => $newRecipes,
-                'fromApi'=> true
-
-            ];
+            $data= $this->makeDataFromApi($recipesApi);
             $this->view('recipes/index', $data);
 
         } else {
@@ -84,6 +90,30 @@ class Recipes extends Controller
 
 
     }
+
+
+
+    public function show($id){
+//        $dataApi = $this->apiModel->getComplexData($id);
+//        $recipesApi = $dataApi['results'];
+//        $data= $this->makeDataFromApi($recipesApi);
+        $data = $this->apiModel->getSingleRecipe($id);
+//        print_r($data['instructions']);
+        $this->view('recipes/show',$data);
+    }
+
+
+
+    public function searched(){
+        $query= $_POST['query'];
+        $dataApi = $this->apiModel->getComplexData($query);
+        $recipesApi = $dataApi['results'];
+
+        $data= $this->makeDataFromApi($recipesApi);
+        $this->view('recipes/searched', $data);
+    }
+
+
 
 // adding recipe to favourites Database table
     public function add()

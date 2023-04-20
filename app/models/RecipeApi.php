@@ -4,9 +4,9 @@ class RecipeApi extends Api
 {
 
 
-    public function getComplexData(): array
+    public function getComplexData($query): array
     {
-        $this->complexSearch();
+        $this->complexSearch($query);
         return $this->getData();
     }
     public function getRandomData(): array
@@ -15,9 +15,10 @@ class RecipeApi extends Api
         return $this->getData();
     }
 
-    public function getRecipeById($Id): array
+    public function getSingleRecipe($id): array
     {
         // single data body
+        $this->singleSearch($id);
         return $this->getData();
     }
 

@@ -6,25 +6,32 @@ class Api
     private $apiKey = API_KEY;
     private $funct;
     private $query  ;
-    private $number=2 ;
+    private $number=9 ;
     private $responce;
     private array $data;
 
 
 
 // set search function to complexSearch
-    public function complexSearch()
+    public function complexSearch($query)
     {
-        $this->funct = 'random';
+        $this->query = $query;
+        $this->funct = 'complexSearch';
     }
     public function randomSearch()
     {
         $this->funct = 'random';
     }
-//create url for Api request
+
+    public function singleSearch($id){
+        $this->funct = $id.'/information';
+    }
+
+
+    //create url for Api request
     public function url()
     {
-        $url = $this->url . $this->funct . '?apiKey=' . $this->apiKey  . '&number=' . $this->number;
+        $url = $this->url . $this->funct . '?apiKey=' . $this->apiKey  . '&query=' . $this->query . '&number=' . $this->number;
         var_dump($url);
         return $url;
     }
