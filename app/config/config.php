@@ -29,4 +29,3 @@ define('SITENAME', 'FoodFormulas');
 define('VERSION', '1.0.0');
 
 // po git ignore
-//po drugim ignore
