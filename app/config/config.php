@@ -27,3 +27,5 @@ define('SITENAME', 'FoodFormulas');
 
 //App version
 define('VERSION', '1.0.0');
+
+// po git ignore
