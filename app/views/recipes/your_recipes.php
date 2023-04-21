@@ -14,22 +14,15 @@
 <div class="grid_div">
     <?php foreach ($data['recipes'] as $recipe): ?>
         <div>
-            <!--        <form class="delete-post-form d-inline" action="-->
-            <?php //= URLROOT; ?><!--/recipes/add" method="POST">-->
-            <!--            <button name="recipe_id" class="btn btn-warning" data-toggle="tooltip" data-placement="top"-->
-            <!--                    value="-->
-            <?php //= $recipe['recipe_id']; ?><!--" title="Like"><i class="fas fa-star"></i></button>-->
-            <!--            <input type="hidden" name="recipe_title" value="-->
-            <?php //= $recipe['recipe_title']; ?><!--">-->
-            <!--            <input type="hidden" name="recipe_img" value="-->
-            <?php //= $recipe['recipe_img']; ?><!--">-->
-            <!--        </form>-->
-            <img src="<?= $recipe['recipe_img']; ?>" alt="">
-            <h4 class="lead"><?= $recipe['recipe_title']; ?></h4>
+            <a href="<?= URLROOT; ?>/recipes/show/<?= $recipe['recipe_id']; ?>">
 
-            <!--            <div class="mb-5 gradient"></div>-->
+                <img src="<?= $recipe['recipe_img']; ?>" alt="">
+                <h4 class="lead"><?= $recipe['recipe_title']; ?></h4>
+                </a>
+                <!--            <div class="mb-5 gradient"></div>-->
 
         </div>
+
     <?php endforeach; ?>
 </div>
 

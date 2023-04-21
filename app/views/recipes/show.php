@@ -15,8 +15,8 @@
             <?php endforeach; ?>
         </div>
         <div class="col-md-6">
-            <p><?= $data['summary'] ?> </p>
-            <p><?= $data['instructions'] ?> </p>
+            <p><?= htmlspecialchars($data['summary'], ENT_QUOTES) ?> </p>
+            <p><?= htmlspecialchars($data['instructions'], ENT_QUOTES) ?> </p>
         </div>
     </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

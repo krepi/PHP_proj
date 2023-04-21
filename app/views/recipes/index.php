@@ -20,11 +20,16 @@
             <div class="api_recipe item">
                 <a href="<?= URLROOT; ?>/recipes/show/<?= $recipe['id']; ?>">
                     <form class="delete-post-form d-inline" action="<?= URLROOT; ?>/recipes/add" method="POST">
-                        <button name="recipe_id" class="btn <?= $recipe['btn_class']; ?>" data-toggle="tooltip"
+                        <button name="recipe_id" class="btn recipe_like <?= $recipe['btn_class']; ?>" data-toggle="tooltip"
                                 data-placement="top"
                                 value="<?= $recipe['id']; ?>" title="Like"><i class="fas fa-star"></i></button>
                         <input type="hidden" name="recipe_title" value="<?= $recipe['title']; ?>">
-<!--                        <input type="hidden" name="recipe_img" value="--><?php //= $recipe['image']; ?><!--">-->
+        <?php if (isset($recipe['image'])): ?>
+                        <input type="hidden" name="recipe_img" value="<?= $recipe['image']; ?>">
+        <?php else: ?>
+                        <input type="hidden" name="recipe_img" value="https://source.unsplash.com/x5SRhkFajrA">
+        <?php endif; ?>
+
                     </form>
 
                     <p class="lead"><?= $recipe['title']; ?></p>
@@ -32,7 +37,6 @@
                     <img src="<?= $recipe['image']  ; ?>" alt="<?= $recipe['title']; ?>">
         <?php else: ?>
             <img src="https://source.unsplash.com/x5SRhkFajrA" alt="">
-<!--            <i class="fa-thin fa-face-smile"></i>-->
         <?php endif; ?>
                     <div class="gradient"></div>
                 </a>
