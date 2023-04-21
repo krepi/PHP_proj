@@ -24,10 +24,16 @@
                                 data-placement="top"
                                 value="<?= $recipe['id']; ?>" title="Like"><i class="fas fa-star"></i></button>
                         <input type="hidden" name="recipe_title" value="<?= $recipe['title']; ?>">
-                        <input type="hidden" name="recipe_img" value="<?= $recipe['image']; ?>">
+<!--                        <input type="hidden" name="recipe_img" value="--><?php //= $recipe['image']; ?><!--">-->
                     </form>
+
                     <p class="lead"><?= $recipe['title']; ?></p>
-                    <img src="<?= $recipe['image']; ?>" alt="">
+        <?php if (isset($recipe['image'])): ?>
+                    <img src="<?= $recipe['image']  ; ?>" alt="<?= $recipe['title']; ?>">
+        <?php else: ?>
+            <img src="https://source.unsplash.com/x5SRhkFajrA" alt="">
+<!--            <i class="fa-thin fa-face-smile"></i>-->
+        <?php endif; ?>
                     <div class="gradient"></div>
                 </a>
             </div>
